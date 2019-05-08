@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_config_generic_users" model="ir.ui.view">
+        <field name="name">account.config.settings.view.form.inherit.generic.users</field>
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//header" position="after">
+				 <group string="Invoice Users Privilege" groups="account.group_account_user">
+					<div class="text-muted">
+						This allow to set generic users salesperson use to create invoice apart from their personal user account.
+						<br/>
+						Also let user that are eligible to change price be set.
+					</div>
+					<label for="default_users" string="."/>
+					<group>
+						<field name="default_users" widget="many2many_tags"/>
+						<field name="default_user_priv" widget="many2many_tags"/>
+					</group>
+				</group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

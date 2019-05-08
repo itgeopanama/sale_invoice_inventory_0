@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_inv_salesperson" model="ir.ui.view">
+            <field name="name">account.invoice.inv.salesperson</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//group//group//field[@name='payment_term_id']" position="after">
+					<field name="username" attrs="{'invisible': [('show_credentials','=',False)], 'required': [('show_credentials','=',True)]}"/>
+					<field name="password" attrs="{'invisible': [('show_credentials','=',False)], 'required': [('show_credentials','=',True)]}" password="True"/>
+					<field name="show_credentials" invisible="1"/>
+				</xpath>
+				<xpath expr="//group//group//field[@name='user_id']" position="after">
+					<field name="pricelist_id"/>
+					<field name="create_stock"/>
+				</xpath>
+				<xpath expr="//page[@name='other_info']//field[@name='origin']" position="after">
+                    <field name="picking_policy"/>
+                    <field name="picking_type_id"/>
+                    <field name="warehouse_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
+                </xpath>
+				<xpath expr="//h1[1]" position="after">
+					<div class="oe_button_box" name="button_box">				
+						<button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('delivery_count', '=', 0)]}" groups="base.group_user">
+							<field name="delivery_count" widget="statinfo" string="Delivery"/>
+						</button>
+					</div>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
